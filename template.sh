@@ -5,12 +5,14 @@ mkdir -p prompt_library
 mkdir -p tools  # all the tools to connects agents to do all task
 mkdir -p utils  # for any utility for any model or cloud
 mkdir -p notebook
+mkdir -p logger
+mkdir -p exception
 
 # Creating files
 touch agent/__init__.py  # constructor. to make this folder a package
 touch agent/agentic_workflow.py
 touch config/__init__.py
-touch config/config.yaml
+touch config/configer.yaml
 touch prompt_library/__init__.py
 touch prompt_library/prompt.py
 
@@ -33,3 +35,5 @@ touch .env
 touch app.py # for front end like streamlit UI
 touch main.py # to create end point with fast API
 touch notebook/experiment.ipynb
+touch logger/logging.py
+touch exception/exceptionhandeling.py

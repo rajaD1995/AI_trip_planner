@@ -36,7 +36,7 @@ async def query_travel_agent(query: QueryRequest):
         
         return {"answer": final_output}
 
-    except "ValueError" as e:
+    except Exception as e:
         return JSONResponse(status_code=500, content={"error":str(e)})
 
 

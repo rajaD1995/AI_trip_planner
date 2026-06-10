@@ -3,6 +3,7 @@ from pydantic import BaseModel  # For data validation of input from user
 from agent.agentic_workflow import Graphbuilder
 import os
 from starlette.responses import JSONResponse
+from utils.save_to_document import save_document
 
 app = FastAPI()
 
@@ -24,16 +25,17 @@ async def query_travel_agent(query: QueryRequest):
         print(f"graph is saved as my_graph.png in {os.getcwd()}")
 
         # Assuming request is a pydantic object like {"question":"your text"}
-        messages = {"messages":[query.question]}
+        messages = {"messages":[query.query]}
 
         output = react_app.invoke(messages)
 
         # If result is in dict with messages
         if isinstance (output,dict) and "messages" in output:
             final_output = output["messages"][-1].content
+            save_document(final_output)
         else:
             final_output = str(output)
-        
+            save_document(final_output)
         return {"answer": final_output}
 
     except Exception as e:

@@ -25,9 +25,10 @@ for message in st.session_state.messages:
 
 # Chat input form
 with st.form(key="query_form", clear_on_submit=True):
-    user_input = st.text_input(
+    user_input = st.text_area(
         "Your question:", 
-        placeholder="e.g., Plan a trip to Goa for 5 days with ₹50000 budget"
+        placeholder="e.g., Plan a trip to Goa for 5 days with ₹50000 budget",
+        height=100
     )
     submit_button = st.form_submit_button("Send")
 
@@ -40,7 +41,7 @@ if submit_button and user_input.strip():
     
     try:
         with st.spinner("Planning your trip... 🤖"):
-            payload = {"question": user_input}
+            payload = {"query": user_input}
             response = requests.post(f"{BASE_URL}/query", json=payload, timeout=60)
         
         if response.status_code == 200:

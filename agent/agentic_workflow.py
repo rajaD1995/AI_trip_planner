@@ -34,7 +34,7 @@ class Graphbuilder():
     def agent_function(self,state:MessagesState):
         '''Main agent function. It will take decesion'''
         user_question = state["messages"]
-        input_question = [self.SYSTEM_PROMPT] + user_question
+        input_question = [self.system_prompt] + user_question
         response = self.llm_with_tools.invoke(input_question)
         return {"messages":[response]}
 

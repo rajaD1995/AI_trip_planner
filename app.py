@@ -25,6 +25,7 @@ for message in st.session_state.messages:
 
 # Chat input form
 with st.form(key="query_form", clear_on_submit=True):
+    # Use text_area to increase the input box area
     user_input = st.text_area(
         "Your question:", 
         placeholder="e.g., Plan a trip to Goa for 5 days with ₹50000 budget",
@@ -41,7 +42,8 @@ if submit_button and user_input.strip():
     
     try:
         with st.spinner("Planning your trip... 🤖"):
-            payload = {"query": user_input}
+            # It should be connected with fastapi - messages = {"messages":[query.query]} - 2nd query
+            payload = {"query": user_input} 
             response = requests.post(f"{BASE_URL}/query", json=payload, timeout=60)
         
         if response.status_code == 200:
